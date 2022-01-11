@@ -1,6 +1,9 @@
 <?php
 
-
+if (!file_exists(ROOT_PATH . 'public' . DS . 'install' . DS . 'install.lock')) {
+    header('location:/install');
+    die;
+}
 
 
 return [

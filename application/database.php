@@ -2,9 +2,9 @@
 return 
 array (
   'hostname' => '127.0.0.1',
-  'database' => 'frpc_cn',
-  'username' => 'frpc_cn',
-  'password' => 'frpc_cn',
+  'database' => '',
+  'username' => '',
+  'password' => '',
   'hostport' => '3306',
   'prefix' => 'ecms_',
 )
