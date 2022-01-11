@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$system.company}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+        /*
+         * thinkphp5分页样式
+         * by:时间博客
+         */
+        .pagination {
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .pagination li {
+            border-radius: 3px;
+            border: 1px solid #dfdfdf;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .pagination .active {
+            background: #09F;
+            color: #FFF;
+            border-color: #09F;
+            margin: 0 2px;
+        }
+
+        .pagination .disabled {
+            color: #aaa;
+        }
+
+        .pagination a {
+            border-radius: 3px;
+            display: inline-block;
+            padding: 5px 12px;
+        }
+
+        .pagination span {
+            border-radius: 3px;
+            display: inline-block;
+            padding: 5px 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">主页</a>
+        <a><cite>组件</cite></a>
+        <a><cite>数据表格</cite></a>
+        <a><cite>简单用法</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章标题</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="key" placeholder="请输入" autocomplete="off" class="layui-input"
+                                       id="key">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章标签</label>
+                            <div class="layui-input-inline">
+
+                                <select name="t" class="ttt">
+                                    <option value="">请选择标签</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" id="search">
+                            <button class="layui-btn layuiadmin-btn-list" lay-submit=""
+                                    lay-filter="LAY-app-contlist-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                        <div class="layui-inline" id="">
+                        <a href="openExeTest:;" class="layui-btn" type="submit"
+                           lay-filter="set_website">启动服务</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-card-body">
+
+
+                    <div id="LAY_preview">
+
+                        <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-1" lay-id="test"
+                             style=" ">
+                            <div class="layui-table-box">
+                                <div class="layui-table-body layui-table-main">
+                                    <table cellspacing="0" cellpadding="0" border="0" class="layui-table"
+                                           style="text-align: left;width: 100%">
+                                        <tr data-index="0" style="text-align: center">
+                                            <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
+                                                <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-checkbox"
+                                                     id="all">
+                                                    <input type="checkbox" name="" lay-skin="primary">
+                                                    <div class="layui-unselect layui-form-checkbox layui-form-checked"
+                                                         lay-skin="primary"><i class="layui-icon layui-icon-ok"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td data-field="username" data-key="1-0-2" class="">
+                                                备注
+                                            </td>
+                                            <td data-field="username" data-key="1-0-2" class="">
+                                                本地地址
+                                            </td>
+                                            <td data-field="username" data-key="1-0-2" class="">
+                                                远程地址
+                                            </td>
+                                            <td data-field="sex" data-key="1-0-3" class="">
+                                                日期
+                                            </td>
+                                            <td>
+                                                操作
+                                            </td>
+                                        </tr>
+                                        <tbody>
+
+                                        {foreach $data as $dat}
+                                        <tr data-index="0" class="">
+                                            <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
+                                                <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-checkbox">
+                                                    <input type="checkbox" name="layTableCheckbox" lay-skin="primary"
+                                                           class="listcheckbox" value="{$dat.id}">
+                                                    <div class="layui-unselect layui-form-checkbox layui-form-checked"
+                                                         lay-skin="primary"><i class="layui-icon layui-icon-ok"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td data-field="username" data-key="1-0-2" class="">
+                                                <div class="layui-table-cell laytable-cell-1-0-5">{$dat.name}</div>
+                                            </td>
+                                            <td data-field="username" data-key="1-0-2" class="">
+                                                <div class="layui-table-cell laytable-cell-1-0-5"><a href="//{$dat.ip}:{$dat.port}" target="_blank">{$dat.ip}:{$dat.port}</a></div>
+                                            </td>
+                                            <td data-field="username" data-key="1-0-2" class="">
+                                                <div class="layui-table-cell laytable-cell-1-0-5"><a href="//{$dat.remote_ip}:{$dat.remote_port}" target="_blank">{$dat.remote_ip}:{$dat.remote_port}</a></div>
+                                            </td>
+                                            <td data-field="sex" data-key="1-0-3" class="">
+                                                <div class="layui-table-cell laytable-cell-1-0-5">{$dat.update_time}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a data-href="{:url('edit',['i'=>$dat['id']])}"
+                                                   class="layui-btn layui-btn-normal layui-btn-xs edit" id=""
+                                                   lay-event="edit"><i
+                                                        class="layui-icon layui-icon-edit"></i>编辑</a>
+                                                <a data-href="{:url(\'del\',[\'i\'=>$dat[\'id\']])}"
+                                                   class="layui-btn layui-btn-danger layui-btn-xs del"
+                                                ><i
+                                                        class="layui-icon layui-icon-delete"></i>删除</a>
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <style>
+                                .laytable-cell-1-0-0 {
+                                    width: 48px;
+                                }
+
+                                .laytable-cell-1-0-1 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-2 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-3 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-4 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-5 {
+                                }
+
+                                .laytable-cell-1-0-6 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-7 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-8 {
+                                    width: 80px;
+                                }
+
+                                .laytable-cell-1-0-9 {
+                                    width: 135px;
+                                }</style>
+                        </div>
+                        <div style="margin: 10px auto">
+                            <div class="layui-btn" id="all_del">删除选中</div>
+                            <div class="layui-btn" id="settype">移动选中至</div>
+                            <div class="layui-form layui-card-header layuiadmin-card-header-auto" style="display: initial;
+    width: 166px;">
+                                <div class="layui-inline">
+
+                                    <select class="ttt settype">
+                                        <option value="0">请选择标签</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    {$render}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/ecms/server/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/ecms/server/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function () {
+        var table = layui.table;
+        var $ = layui.jquery;
+        form = layui.form;
+
+        b = true
+        $('#all').click(function () {
+            if (b) {
+                $("input:checkbox[name='layTableCheckbox']").prop('checked', b)
+                b = false
+            } else {
+                $("input:checkbox[name='layTableCheckbox']").prop('checked', b)
+                b = true
+            }
+            form.render('checkbox')
+        });
+
+
+        setSelect()
+
+        $('#search').click(function () {
+            var key = $('#key').val()
+            var t = $('.ttt').val()
+
+            window.location.href = '?t=' + t + '&key=' + key
+            return;
+        });
+        $('.del').click(function () {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                var href = $(this).attr('data-href')
+                window.location.href = href
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+
+        $('.edit').click(function () {
+            var href = $(this).attr('data-href')
+            layer.open({
+                title: '配置更改',
+                type: 2,
+                btnAlign: 'c',
+                area: ['1200px', '800px'],
+                content: href,
+                success: function (layero, index) {
+                    // let body = layer.getChildFrame('body', index);
+                    // body.find("#name").val(jsonObj.name);   //通过class名进行获取数据
+                    // alert(jsonObj.id);
+                    // body.find("#id").val(0);
+                    // body.find("#parentid").val(jsonObj.id);
+                    // layui.tree.render();
+                },
+            });
+        })
+
+
+        function setSelect() {
+            var $ = layui.jquery;
+
+            var select = $(".ttt");//TypeID为HTML标签ID
+            '{foreach $type2 as $t1}'
+            name = topString('{$t1.level}') + '{$t1.name}';
+            bool = '{if $t1.id==$tt}selected {/if}';
+            // select.append(new Option(name,'{$t1.id}',bool));// 下拉菜单里添加元素
+
+            str = "<option value=\"{$t1.id}\" " + bool + " >" + name + "</option>";
+            select.append(str)
+            '{/foreach}'
+            layui.form.render("select");
+
+            function topString(level) {
+                var str = '';
+                for (var i = 0; i < level; i++) {
+                    str += '|----';
+                }
+                return str;
+            }
+        }
+
+
+        $('#all_del').click(function () {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                i = new Array();
+                $('.listcheckbox:checked').each(function () {
+                    i.push($(this).val())
+                })
+                i = i.join(',', i)
+                console.log(i)
+                $.post("{:url('del')}", {'i': i}, function (res) {
+                    if (res.code == 1) {
+                        alert('删除成功，请刷新')
+                    } else {
+                        alert('删除失败')
+                    }
+                })
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+
+        $('#settype').click(function () {
+            var msg = "您真的确定要移动吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                i = new Array();
+                $('.listcheckbox:checked').each(function () {
+                    i.push($(this).val())
+                })
+                i = i.join(',', i)
+                console.log(i)
+
+                t = $('.settype option:selected').val()
+                console.log(t)
+                if (t <= 0) {
+                    alert('请选择分类')
+                    return false
+                }
+                $.post("{:url('settype')}", {'i': i, 't': t}, function (res) {
+                    if (res.code == 1) {
+                        alert('移动成功，请刷新')
+                    } else {
+                        alert('移动失败')
+                    }
+                })
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        $(function () {
+            //注册加载失败事件,再次加载时先重新设置url,在清空原先的注册加载失败事件
+            $("img").attr("onerror", "this.src='/ecms/server/null.jpg'");
+            //遍历img标签,再次重新加载
+            $("img").each(function () {
+                this.src = this.src;
+            });
+
+        });
+
+
+    });
+
+
+</script>
+</body>
+</html>

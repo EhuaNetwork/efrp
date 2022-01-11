@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$system.company}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">网站设置</div>
+                <div class="layui-card-body" pad15>
+                    <form action="addparam" method="post">
+                        <div class="layui-form" wid100 lay-filter="">
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="as" value="" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">键</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="key" value="" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">值</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="value" value="" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" type="submit" lay-filter="set_website">添加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/ecms/server/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/ecms/server/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'set']);
+</script>
+</body>
+</html>

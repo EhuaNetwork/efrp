@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$system.company}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+        /*
+         * thinkphp5分页样式
+         * by:时间博客
+         */
+        .pagination {
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .pagination li {
+            border-radius: 3px;
+            border: 1px solid #dfdfdf;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .pagination .active {
+            background: #09F;
+            color: #FFF;
+            border-color: #09F;
+            margin: 0 2px;
+        }
+
+        .pagination .disabled {
+            color: #aaa;
+        }
+
+        .pagination a {
+            border-radius: 3px;
+            display: inline-block;
+            padding: 5px 12px;
+        }
+
+        .pagination span {
+            border-radius: 3px;
+            display: inline-block;
+            padding: 5px 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">主页</a>
+        <a><cite>组件</cite></a>
+        <a><cite>数据表格</cite></a>
+        <a><cite>简单用法</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">关键词</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="key" placeholder="请输入" autocomplete="off" class="layui-input"
+                                       id="key">
+                            </div>
+                        </div>
+
+
+                        <div class="layui-inline" id="search">
+                            <button class="layui-btn layuiadmin-btn-list" lay-submit=""
+                                    lay-filter="LAY-app-contlist-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div id="test9" class="demo-tree demo-tree-box" style="width: 100%; overflow: hidden;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/ecms/server/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.use(['tree', 'util'], function(){
+        var tree = layui.tree
+            ,layer = layui.layer
+            ,util = layui.util
+            ,$ = layui.jquery
+
+            //模拟数据
+            ,data1 = {$data};
+
+
+
+
+
+        $('#search').click(function () {
+            var key = $('#key').val()
+            var t = $('#t').val()
+
+            window.location.href = '?t=' + t + '&key=' + key
+            return;
+        })
+
+
+
+
+        //开启节点操作图标
+        tree.render({
+            elem: '#test9'
+            ,data: data1
+            ,edit: ['add', 'update', 'del'] //操作节点的图标
+            ,click: function(obj){
+                console.log(JSON.stringify(obj.data))
+                id=obj.data.id//当前点击的栏目id
+
+                layer.confirm('选择欲执行的操作', {
+                    btn: [ '追加文章','配置更改'] //可以无限个按钮
+                 ,btn3: function(index, layero){
+                        //按钮【按钮三】的回调
+                }
+                }, function(index, layero){
+                    //按钮【按钮一】的回调
+                    layer.open({
+                        title : '追加文章',
+                        type : 2,
+                        btnAlign : 'c',
+                        area : [ '1200px', '800px' ],
+                        content : "/{$admPath}/article/create?i="+id,
+                        success: function (layero, index) {
+                            // let body = layer.getChildFrame('body', index);
+                            // body.find("#name").val(jsonObj.name);   //通过class名进行获取数据
+                            // body.find("#id").val(0);
+                            // body.find("#parentid").val(jsonObj.id);
+                            // layui.tree.render();
+                        },
+                    });
+                }, function(index,layero){
+                    //按钮【按钮二】的回调
+
+                    layer.open({
+                        title : '配置更改',
+                        type : 2,
+                        btnAlign : 'c',
+                        area : [ '500px', '520px' ],
+                        content : "edit?i="+id,
+                        success: function (layero, index) {
+                            // let body = layer.getChildFrame('body', index);
+                            // body.find("#name").val(jsonObj.name);   //通过class名进行获取数据
+                            // alert(jsonObj.id);
+                            // body.find("#id").val(0);
+                            // body.find("#parentid").val(jsonObj.id);
+                            // layui.tree.render();
+                        },
+                    });
+                });
+
+
+
+            },operate : function(obj) {
+                var type = obj.type; //得到操作类型：add、edit、del
+                var data = obj.data; //得到当前节点的数据
+                var elem = obj.elem; //得到当前节点元素
+
+                //Ajax 操作
+                var id = data.id; //得到节点索引
+                if (type === 'add') { //增加节点
+                    var data = obj.data;
+                    var jsonObj = JSON.parse(JSON.stringify(data));
+                    // //返回 key 值
+                    // layer.open({
+                    //     title : '添加二级部门',
+                    //     type : 2,
+                    //     btnAlign : 'c',
+                    //     area : [ '500px', '520px' ],
+                    //     content : "create?i="+jsonObj.id,
+                    //     success: function (layero, index) {
+                    //         // let body = layer.getChildFrame('body', index);
+                    //         // body.find("#name").val(jsonObj.name);   //通过class名进行获取数据
+                    //         // alert(jsonObj.id);
+                    //         // body.find("#id").val(0);
+                    //         // body.find("#parentid").val(jsonObj.id);
+                    //         // layui.tree.render();
+                    //     },
+                    // });
+
+                    $.post("create2",{'i':jsonObj.id},function (res){
+
+                    })
+                } else if (type === 'update') { //修改节点
+                    var data = obj.data;
+                    ii= data.id
+                    name=elem.find('.layui-tree-txt').html();
+                    $.post('edit_name',{'i':ii,'name':name},function (){
+
+                    })
+
+                } else if (type === 'del') { //删除节点
+                    var data = obj.data;
+                    ii= data.id
+                    $.post('edit_del',{'i':ii},function (){
+
+                    })
+                }
+                ;
+            }
+        });
+    });
+</script>
+</body>
+</html>

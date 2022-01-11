@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$system.company}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+<style>
+    .layui-anim-upbit{
+        z-index: 999999999999999;
+    }
+</style>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">添加数据</div>
+                <div class="layui-card-body" pad15>
+                    <form action="{:url('create')}" method="post">
+
+                        <div class="layui-form" wid100 lay-filter="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">设置分类</label>
+                                <div class="layui-input-block">
+                                        <select name="i" id="t">
+                                            <option value="">请选择标签</option>
+                                            {foreach $type2 as $t1}
+                                            <option value="{$t1.id}">
+                                                {:topString($t1.level)}{$t1.name}
+                                            </option>
+                                            {/foreach}
+
+                                        </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">映射备注</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="name" value="" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">本机&emsp;IP</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="ip" value="127.0.0.1" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">本地端口</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="port" value="" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">远程&emsp;IP</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="remote_ip" value="{$server_ip}" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">远程端口</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="remote_port" value="" class="layui-input">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="layui-form-item" style="margin-top: 20px">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" type="submit" lay-filter="set_website">确认保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="httpS://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<!--3.1.1版本-->
+<style>
+    #alt {float: left;background: #fff;border-radius: 5px;border: 1px solid #9b9b9b;height: 30px;width: 80%;padding-left: 5px;margin-left: 10px;}
+</style>
+{include file='common/create_js'}
+
+<script src="/ecms/server/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/ecms/server/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'set', 'layedit'], function () {
+        var table = layui.table;
+        layedit = layui.layedit;
+        $ = layui.jquery;
+        upload = layui.upload;
+
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            , url: '/api/upload/img' //改成您自己的上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code != 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                $('#img').val(res.data.src)
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        layedit.set({
+            uploadImage: {
+                url: '/api/upload/img' //接口url
+                , type: 'post' //默认post
+            }
+        });
+
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$system.company}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+ 
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">网站设置</div>
+                <div class="layui-card-body" pad15>
+                    <form action="{:url('repasssave')}" method="post" onsubmit="fuwenben()">
+
+                        <input type="hidden" name="i" value="{:session('server.id')}" class="layui-input">
+
+                        <div class="layui-form" wid100 lay-filter="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">原密码</label>
+                                <div class="layui-input-block">
+                                        <input type="text" name="repass" value="" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">重置后账号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="name" value="" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">重置后密码</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="pass" value="" class="layui-input">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="layui-form-item" style="margin-top: 20px">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" type="submit" lay-filter="set_website">确认保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/ecms/server/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/ecms/server/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'set','layedit'],function () {
+        var table = layui.table;
+        layedit = layui.layedit;
+        $ = layui.jquery;
+        upload = layui.upload;
+
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            , url: '/api/upload/img' //改成您自己的上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code != 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                $('#img').val(res.data.src)
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        layedit.set({
+            uploadImage: {
+                url: '/api/upload/img' //接口url
+                ,type: 'post' //默认post
+            }
+        });
+
+        //构建一个默认的编辑器
+        var index = layedit.build('LAY_demo1');
+
+        //编辑器外部操作
+        var active = {
+            content: function(){
+                alert(layedit.getContent(index)); //获取编辑器内容
+            }
+            ,text: function(){
+                alert(layedit.getText(index)); //获取编辑器纯文本内容
+            }
+            ,selection: function(){
+                alert(layedit.getSelection(index));
+            }
+        };
+
+        $('.site-demo-layedit').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        //自定义工具栏
+        layedit.build('LAY_demo2', {
+            tool: ['face', 'link', 'unlink', '|', 'left', 'center', 'right']
+            ,height: 100
+        })
+
+    });
+</script>
+</body>
+</html>

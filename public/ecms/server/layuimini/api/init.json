@@ -1,0 +1,173 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/welcome-1.html?t=1"
+  },
+  "logoInfo": {
+    "title": "LAYUI MINI",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "主页模板",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "主页一",
+              "href": "page/welcome-1.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页二",
+              "href": "page/welcome-2.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页三",
+              "href": "page/welcome-3.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "栏目管理",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "栏目列表",
+              "href": "{:url($admPath.'/index/load')}",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页二",
+              "href": "page/welcome-2.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页三",
+              "href": "page/welcome-3.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "组件管理",
+      "icon": "fa fa-lemon-o",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "图标列表",
+          "href": "page/icon.html",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self"
+        },
+        {
+          "title": "图标选择",
+          "href": "page/icon-picker.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+        },
+        {
+          "title": "颜色选择",
+          "href": "page/color-select.html",
+          "icon": "fa fa-dashboard",
+          "target": "_self"
+        },
+        {
+          "title": "下拉选择",
+          "href": "page/table-select.html",
+          "icon": "fa fa-angle-double-down",
+          "target": "_self"
+        },
+        {
+          "title": "文件上传",
+          "href": "page/upload.html",
+          "icon": "fa fa-arrow-up",
+          "target": "_self"
+        },
+        {
+          "title": "富文本编辑器",
+          "href": "page/editor.html",
+          "icon": "fa fa-edit",
+          "target": "_self"
+        },
+        {
+          "title": "省市县区选择器",
+          "href": "page/area.html",
+          "icon": "fa fa-rocket",
+          "target": "_self"
+        }
+      ]
+    },
+    {
+      "title": "其它管理",
+      "icon": "fa fa-slideshare",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "多级菜单",
+          "href": "",
+          "icon": "fa fa-meetup",
+          "target": "",
+          "child": [
+            {
+              "title": "按钮1",
+              "href": "page/button.html?v=1",
+              "icon": "fa fa-calendar",
+              "target": "_self",
+              "child": [
+                {
+                  "title": "按钮2",
+                  "href": "page/button.html?v=2",
+                  "icon": "fa fa-snowflake-o",
+                  "target": "_self",
+                  "child": [
+                    {
+                      "title": "按钮3",
+                      "href": "page/button.html?v=3",
+                      "icon": "fa fa-snowflake-o",
+                      "target": "_self"
+                    },
+                    {
+                      "title": "表单4",
+                      "href": "page/form.html?v=1",
+                      "icon": "fa fa-calendar",
+                      "target": "_self"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "失效菜单",
+          "href": "page/error.html",
+          "icon": "fa fa-superpowers",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$system.company}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/ecms/server/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+
+                    <a class="layui-btn addparam">添加自变量</a>
+                </div>
+                <div class="layui-card-body" pad15>
+                    <form action="{:url($admPath.'/index/save')}" method="post">
+                        <div class="layui-form" wid100 lay-filter="">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>变量名</th>
+                                    <th>变量值</th>
+<!--                                    <th>置顶值</th>-->
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $sys as $dat}
+                                <tr>
+
+                                    <td>{$dat.as}（{$dat.key}）</td>
+                                    <td> {if strlen($dat.value)>50}
+                                        <textarea name="{$dat.key}"
+                                                  class="layui-textarea">{$dat.value}</textarea>
+                                        {else}
+                                        <input type="text" name="{$dat.key}" value="{$dat.value}" class="layui-input">
+                                        {/if}</td>
+                                    <td>
+                                        <a data-href="{:url(\'del\',[\'i\'=>$dat[\'key\']])}"
+                                           class="layui-btn layui-btn-danger layui-btn-xs del"  lay-event="del"
+                                           ><i
+                                                class="layui-icon layui-icon-delete"></i>删除</a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+
+
+
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" type="submit" lay-filter="set_website">确认保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/ecms/server/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/ecms/server/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'set'], function () {
+        $ = layui.jquery
+
+
+        $('.del').click(function () {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                var href = $(this).attr('data-href')
+                window.location.href = href
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+
+
+        $('.addparam').on('click', function () {
+            layer.open({
+                title: '添加变量',
+                type: 2,
+                btnAlign: 'c',
+                area: ['500px', '520px'],
+                content: "addparam",
+                success: function (layero, index) {
+                    // let body = layer.getChildFrame('body', index);
+                    // body.find("#name").val(jsonObj.name);   //通过class名进行获取数据
+                    // alert(jsonObj.id);
+                    // body.find("#id").val(0);
+                    // body.find("#parentid").val(jsonObj.id);
+                    // layui.tree.render();
+                },
+            });
+        })
+    });
+</script>
+</body>
+</html>

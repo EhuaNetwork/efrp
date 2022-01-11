@@ -1,0 +1,34 @@
+{
+    "name": "ehua/ecms",
+    "description": "ecms建站系统",
+    "type": "project",
+    "keywords": [
+        "ecms"
+    ],
+    "homepage": "http://ecms.ehua.pro/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "ehua",
+            "email": "ehua999@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "topthink/framework": "5.0.*",
+        "ehua/tool": "dev-master",
+        "phpoffice/phpexcel": "^1.8",
+        "phpoffice/phpspreadsheet": "^1.19"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "application"
+        }
+    },
+    "extra": {
+        "think-path": "thinkphp"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
