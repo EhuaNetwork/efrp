@@ -1,11 +1,11 @@
 {
-    "name": "ehua/ecms",
-    "description": "ecms建站系统",
+    "name": "ehua/efrp",
+    "description": "efrp内网穿透系统",
     "type": "project",
     "keywords": [
-        "ecms"
+        "efrp"
     ],
-    "homepage": "http://ecms.ehua.pro/",
+    "homepage": "http://efrp.ehua.pro/",
     "license": "Apache-2.0",
     "authors": [
         {
